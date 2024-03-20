@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: automacao-app
+    build:
+      context: .
+    volumes:
+      - ./:/app
+    command: yarn start
+    ports:
+      - 8080:8080
+
+  db:
+    image: postgres:16.2
+    container_name: postgres-container
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+
+  adminer:
+    ports:
+      - "5432:5432"
+    image: adminer
+    restart: always
+    volumes:
+      - postgres_db:/var/lib/postgresql/data
+volumes:
+  postgres_db:
+    driver: local
