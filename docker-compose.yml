@@ -11,21 +11,16 @@ services:
     ports:
       - 8080:8080
 
-  db:
-    image: postgres:16.2
-    container_name: postgres-container
+  postgres:
+    image: postgres:latest
+    container_name: postgres
     restart: always
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres123
-
-  adminer:
-    ports:
-      - "5432:5432"
-    image: adminer
-    restart: always
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres123
     volumes:
-      - postgres_db:/var/lib/postgresql/data
+      - postgres:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
 volumes:
-  postgres_db:
-    driver: local
+  postgres:
