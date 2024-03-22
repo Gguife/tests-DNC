@@ -6,7 +6,7 @@ const ConnectDB = async () =>{
   try{
     const pool = new Pool({
       user: process.env.PGUSER,
-      host: 'postgres-container',
+      host: process.env.PGHOST,
       password: process.env.PGPASSWORD,
       database: process.env.PGDATABASE,
       port: process.env.PGPORT
